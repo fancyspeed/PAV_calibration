@@ -4,10 +4,15 @@ Algorithms for CTR prediction.
 
 * L1/L2 Logistic Regression
 
-* Random Forest
+* FTRL
+
+* Star tree 
+
+* FFM
 
 * GBM
 
-* star tree 
+* Random Forest
 
-* bayesian inference: http://research.microsoft.com/apps/pubs/default.aspx?id=122779
+* Bayesian inference: http://research.microsoft.com/apps/pubs/default.aspx?id=122779
+
