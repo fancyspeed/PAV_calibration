@@ -1,18 +1,7 @@
-Algorithms for CTR prediction.
+Improved PAV algorithm for LR Calibration.
 
-## TODO list:
+For data set of hundreds of thousands of bins, PAV is very time consuming.
 
-* L1/L2 Logistic Regression
+I modified PAV to no backtracking algorithm. 
 
-* FTRL
-
-* Star tree 
-
-* FFM
-
-* GBM
-
-* Random Forest
-
-* Bayesian inference: http://research.microsoft.com/apps/pubs/default.aspx?id=122779
 
