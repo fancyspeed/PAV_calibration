@@ -66,13 +66,14 @@ def train(v_list, p_out):
         for start, end, ctr, imp in v_list:
             fo.write('%s\t%s\n' % (end, ctr))
 
+if __name__ == '__main__':
+    import sys
+    if len(sys.argv) < 4:
+        print '<usage> truth pred out_dict'
+        exit(1)
 
-import sys
-if len(sys.argv) < 4:
-    print '<usage> truth, pred, out'
-    exit(1)
-train_pairs = get_train_pairs(sys.argv[1], sys.argv[2])
-parts = get_parts(train_pairs)
-train(parts, sys.argv[3])
+    train_pairs = get_train_pairs(sys.argv[1], sys.argv[2])
+    parts = get_parts(train_pairs)
+    train(parts, sys.argv[3])
 
 
