@@ -3,23 +3,19 @@
 #description: Pool-adjacent-violators (PAV) Algorithm
 import math
 
-max_bin_num = 1000
-min_bin_imp = 50000
-min_bin_clk = 50
+max_bin_num = 1000  # split train samples to n bins
+min_bin_imp = 500  
+min_bin_clk = 30
 min_bin_step = 0.00001
 
+# 1. sort samples and get bets parititions for training 
+# 2. no look back calibration 
 
-def get_train_pairs(p_truth, p_pred):
-    pairs = []
-    with open(p_truth) as fin:
-        for line in open(p_pred):
-            pred_ctr = float(line.split(' ')[0].strip())
-            true_clk = float(fin.readline().split(' ')[0].strip())
-            pairs.append( (pred_ctr, true_clk) )
-    return pairs 
+def get_parts(p_truth, p_pred):
+    pred_list = [float(line.split(' ')[0].strip()) for line in open(p_pred)]
+    y_list = [float(line.split(' ')[0].strip()) for line in open(p_truth)]
+    train_pairs = zip(pred_list,y_list)
 
-
-def get_parts(train_pairs):
     sort_list = sorted(train_pairs, key=lambda d:d[0])
     step = len(sort_list) / max_bin_num
     v_list = [] # start, end, ctr, imp, clk
@@ -63,7 +59,7 @@ def train(v_list, p_out):
         # 3. if no avg(nexts) < i; do nothing
         i += 1
     with open(p_out, 'w') as fo:
-        for start, end, ctr, imp in v_list:
+        for start, end, ctr, imp, clk in v_list:
             fo.write('%s\t%s\n' % (end, ctr))
 
 if __name__ == '__main__':
@@ -72,8 +68,6 @@ if __name__ == '__main__':
         print '<usage> truth pred out_dict'
         exit(1)
 
-    train_pairs = get_train_pairs(sys.argv[1], sys.argv[2])
-    parts = get_parts(train_pairs)
+    parts = get_parts(sys.argv[1], sys.argv[2])
     train(parts, sys.argv[3])
-
 
